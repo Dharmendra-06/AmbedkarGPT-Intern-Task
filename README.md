@@ -268,7 +268,7 @@ print(f"Embedding dimension: {len(vec)}")  # Should output: 384
 - [Ollama Documentation](https://ollama.ai/)
 - [Sentence Transformers](https://www.sbert.net/)
 
-## 🤝 Assignment Details
+## 📝 Assignment Details
 
 This project was created as part of the AI Intern assignment for **Kalpit Pvt Ltd, UK**.
 
@@ -284,15 +284,14 @@ This project was created as part of the AI Intern assignment for **Kalpit Pvt Lt
 - Vector store persists between runs for efficiency
 - System only answers based on the provided speech text
 
-##  Acknowledgments
+## Acknowledgments
 
 - Dr. B.R. Ambedkar for the profound insights
 - LangChain, ChromaDB, HuggingFace, and Ollama communities
-- Kalpit Pvt Ltd for this learning opportunity
 
 ## 📧 Contact
 
-For questions or issues, contact: kalpiksingh2005@gmail.com
+For questions or issues, contact: dharmendrra06@gmail.com
 
 ---
 
