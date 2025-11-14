@@ -35,7 +35,7 @@ This project implements a complete RAG pipeline that:
 curl -fsSL https://ollama.ai/install.sh | sh
 ```
 
-**For Windows:**
+**For Window/Mac:**
 Download from [https://ollama.ai/download](https://ollama.ai/download)
 
 **Pull the Mistral model:**
@@ -110,7 +110,7 @@ The system will load the existing vector store from `./chroma_db/`, making start
 ### Example Interaction
 
 ```
-🙏 Welcome to AmbedkarGPT - RAG Q&A System
+Welcome to AmbedkarGPT - RAG Q&A System
 ============================================================
 
 📚 Loading speech text...
