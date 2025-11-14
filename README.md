@@ -61,7 +61,7 @@ cd AmbedkarGPT-Intern-Task
 **Create a virtual environment:**
 ```bash
 # Using venv
-python -m venv venv
+python3 -m venv venv
 
 # Activate on Linux/Mac
 source venv/bin/activate
@@ -89,7 +89,7 @@ pip install -r requirements.txt
 ### Run the Q&A System
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 ### First Run
