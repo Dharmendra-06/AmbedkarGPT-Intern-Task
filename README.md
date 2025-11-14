@@ -52,7 +52,7 @@ ollama run mistral
 ### Step 2: Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AmbedkarGPT-Intern-Task.git
+git clone https://github.com/Dharmendra-06/AmbedkarGPT-Intern-Task.git
 cd AmbedkarGPT-Intern-Task
 ```
 
@@ -61,7 +61,7 @@ cd AmbedkarGPT-Intern-Task
 **Create a virtual environment:**
 ```bash
 # Using venv
-python -m venv venv
+python3 -m venv venv
 
 # Activate on Linux/Mac
 source venv/bin/activate
@@ -89,7 +89,7 @@ pip install -r requirements.txt
 ### Run the Q&A System
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 ### First Run
@@ -110,7 +110,7 @@ The system will load the existing vector store from `./chroma_db/`, making start
 ### Example Interaction
 
 ```
-🙏 Welcome to AmbedkarGPT - RAG Q&A System
+ Welcome to AmbedkarGPT - RAG Q&A System
 ============================================================
 
 📚 Loading speech text...
