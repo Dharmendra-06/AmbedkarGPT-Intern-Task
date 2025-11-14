@@ -20,18 +20,18 @@ def setup_vector_store(file_path="speech.txt", persist_directory="./chroma_db"):
     Load the speech text, split into chunks, create embeddings, and store in ChromaDB.
     
     Args:
-        file_path: Path to the speech text file
-        persist_directory: Directory to persist the ChromaDB database
+      file_path: Path to the speech text file
+      persist_directory: Directory to persist the ChromaDB database
         
     Returns:
-        vectorstore: ChromaDB vector store instance
+      vectorstore: ChromaDB vector store instance
     """
     print("📚 Loading speech text...")
     
     # Check if file exists
     if not os.path.exists(file_path):
-        print(f"❌ Error: {file_path} not found!")
-        sys.exit(1)
+      print(f"❌ Error: {file_path} not found!")
+      sys.exit(1)
     
     # Load the document
     loader = TextLoader(file_path, encoding='utf-8')
@@ -41,9 +41,9 @@ def setup_vector_store(file_path="speech.txt", persist_directory="./chroma_db"):
     # Split text into chunks
     print("✂️  Splitting text into chunks...")
     text_splitter = CharacterTextSplitter(
-        chunk_size=500,  # Size of each chunk
-        chunk_overlap=50,  # Overlap between chunks to maintain context
-        separator="\n"
+      chunk_size=500,  # Size of each chunk
+      chunk_overlap=50,  # Overlap between chunks to maintain context
+      separator="\n"
     )
     chunks = text_splitter.split_documents(documents)
     print(f"✅ Created {len(chunks)} text chunks")
@@ -51,16 +51,16 @@ def setup_vector_store(file_path="speech.txt", persist_directory="./chroma_db"):
     # Create embeddings using HuggingFace model
     print("🧠 Creating embeddings (this may take a moment on first run)...")
     embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2",
-        model_kwargs={'device': 'cpu'}  # Use CPU for compatibility
+      model_name="sentence-transformers/all-MiniLM-L6-v2",
+      model_kwargs={'device': 'cpu'}  # Use CPU for compatibility
     )
     
     # Create and persist vector store
     print("💾 Creating vector store with ChromaDB...")
     vectorstore = Chroma.from_documents(
-        documents=chunks,
-        embedding=embeddings,
-        persist_directory=persist_directory
+      documents=chunks,
+      embedding=embeddings,
+      persist_directory=persist_directory
     )
     vectorstore.persist()
     print("✅ Vector store created and persisted successfully!")
@@ -73,20 +73,20 @@ def load_existing_vector_store(persist_directory="./chroma_db"):
     Load an existing ChromaDB vector store.
     
     Args:
-        persist_directory: Directory where ChromaDB is persisted
+      persist_directory: Directory where ChromaDB is persisted
         
     Returns:
-        vectorstore: ChromaDB vector store instance
+      vectorstore: ChromaDB vector store instance
     """
     print("📂 Loading existing vector store...")
     embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2",
-        model_kwargs={'device': 'cpu'}
+      model_name="sentence-transformers/all-MiniLM-L6-v2",
+      model_kwargs={'device': 'cpu'}
     )
     
     vectorstore = Chroma(
-        persist_directory=persist_directory,
-        embedding_function=embeddings
+      persist_directory=persist_directory,
+      embedding_function=embeddings
     )
     print("✅ Vector store loaded successfully!")
     return vectorstore
@@ -97,17 +97,17 @@ def setup_qa_chain(vectorstore):
     Set up the RetrievalQA chain with Ollama LLM.
     
     Args:
-        vectorstore: ChromaDB vector store instance
+      vectorstore: ChromaDB vector store instance
         
     Returns:
-        qa_chain: RetrievalQA chain instance
+      qa_chain: RetrievalQA chain instance
     """
     print("🤖 Setting up Ollama LLM...")
     
     # Initialize Ollama with Mistral model
     llm = Ollama(
-        model="mistral",
-        temperature=0.3  # Lower temperature for more focused answers
+      model="mistral",
+      temperature=0.3  # Lower temperature for more focused answers
     )
     
     # Create a custom prompt template
@@ -121,20 +121,20 @@ Question: {question}
 Answer: """
     
     PROMPT = PromptTemplate(
-        template=prompt_template,
-        input_variables=["context", "question"]
+      template=prompt_template,
+      input_variables=["context", "question"]
     )
     
     # Create RetrievalQA chain
     print("🔗 Creating RetrievalQA chain...")
     qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        chain_type="stuff",  # 'stuff' puts all retrieved docs into context
-        retriever=vectorstore.as_retriever(
-            search_kwargs={"k": 3}  # Retrieve top 3 most relevant chunks
-        ),
-        return_source_documents=True,
-        chain_type_kwargs={"prompt": PROMPT}
+      llm=llm,
+      chain_type="stuff",  # 'stuff' puts all retrieved docs into context
+      retriever=vectorstore.as_retriever(
+        search_kwargs={"k": 3}  # Retrieve top 3 most relevant chunks
+      ),
+      return_source_documents=True,
+      chain_type_kwargs={"prompt": PROMPT}
     )
     
     print("✅ QA chain ready!")
@@ -146,11 +146,11 @@ def ask_question(qa_chain, question):
     Ask a question and get an answer from the RAG system.
     
     Args:
-        qa_chain: RetrievalQA chain instance
-        question: User's question string
+      qa_chain: RetrievalQA chain instance
+      question: User's question string
         
     Returns:
-        result: Dictionary containing answer and source documents
+      result: Dictionary containing answer and source documents
     """
     print(f"\n❓ Question: {question}")
     print("🔍 Retrieving relevant context and generating answer...\n")
@@ -161,10 +161,10 @@ def ask_question(qa_chain, question):
     
     # Show source chunks used for the answer
     if result.get('source_documents'):
-        print("📄 Source chunks used:")
-        for i, doc in enumerate(result['source_documents'], 1):
-            print(f"\n[Chunk {i}]")
-            print(doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content)
+      print("📄 Source chunks used:")
+      for i, doc in enumerate(result['source_documents'], 1):
+        print(f"\n[Chunk {i}]")
+        print(doc.page_content[:200] + "..." if len(doc.page_content) > 200 else doc.page_content)
     
     return result
 
@@ -182,11 +182,11 @@ def main():
     
     # Check if vector store already exists
     if os.path.exists(persist_dir) and os.listdir(persist_dir):
-        print("ℹ️  Found existing vector store. Loading...")
-        vectorstore = load_existing_vector_store(persist_dir)
+      print("ℹ️  Found existing vector store. Loading...")
+      vectorstore = load_existing_vector_store(persist_dir)
     else:
-        print("ℹ️  No existing vector store found. Creating new one...")
-        vectorstore = setup_vector_store(persist_directory=persist_dir)
+      print("ℹ️  No existing vector store found. Creating new one...")
+      vectorstore = setup_vector_store(persist_directory=persist_dir)
     
     print()
     
@@ -205,23 +205,23 @@ def main():
             question = input("Your question: ").strip()
             
             if not question:
-                print("⚠️  Please enter a question.\n")
-                continue
+              print("⚠️  Please enter a question.\n")
+              continue
             
             if question.lower() in ['exit', 'quit', 'q']:
-                print("\n👋 Thank you for using AmbedkarGPT. Goodbye!")
-                break
+              print("\n👋 Thank you for using AmbedkarGPT. Goodbye!")
+              break
             
             ask_question(qa_chain, question)
             print("\n" + "-" * 60 + "\n")
             
         except KeyboardInterrupt:
-            print("\n\n👋 Interrupted. Goodbye!")
-            break
+          print("\n\n👋 Interrupted. Goodbye!")
+          break
         except Exception as e:
-            print(f"\n❌ Error: {str(e)}")
-            print("Please try again.\n")
+          print(f"\n❌ Error: {str(e)}")
+          print("Please try again.\n")
 
 
 if __name__ == "__main__":
-    main()
+  main()

@@ -1,4 +1,4 @@
-# 🙏 AmbedkarGPT - RAG Q&A System
+#  AmbedkarGPT - RAG Q&A System
 
 A command-line Retrieval-Augmented Generation (RAG) system that answers questions based on Dr. B.R. Ambedkar's speech excerpt from "Annihilation of Caste". Built using LangChain, ChromaDB, HuggingFace Embeddings, and Ollama with Mistral 7B.
 
@@ -52,7 +52,7 @@ ollama run mistral
 ### Step 2: Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/AmbedkarGPT-Intern-Task.git
+git clone https://github.com/Dharmendra-06/AmbedkarGPT-Intern-Task.git
 cd AmbedkarGPT-Intern-Task
 ```
 
@@ -61,7 +61,7 @@ cd AmbedkarGPT-Intern-Task
 **Create a virtual environment:**
 ```bash
 # Using venv
-python -m venv venv
+python3 -m venv venv
 
 # Activate on Linux/Mac
 source venv/bin/activate
@@ -89,7 +89,7 @@ pip install -r requirements.txt
 ### Run the Q&A System
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 ### First Run
@@ -110,7 +110,7 @@ The system will load the existing vector store from `./chroma_db/`, making start
 ### Example Interaction
 
 ```
-🙏 Welcome to AmbedkarGPT - RAG Q&A System
+ Welcome to AmbedkarGPT - RAG Q&A System
 ============================================================
 
 📚 Loading speech text...
@@ -246,7 +246,7 @@ ollama run mistral
 from langchain.embeddings import HuggingFaceEmbeddings
 
 embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/all-MiniLM-L6-v2"
+  model_name="sentence-transformers/all-MiniLM-L6-v2"
 )
 vec = embeddings.embed_query("test text")
 print(f"Embedding dimension: {len(vec)}")  # Should output: 384
@@ -268,7 +268,7 @@ print(f"Embedding dimension: {len(vec)}")  # Should output: 384
 - [Ollama Documentation](https://ollama.ai/)
 - [Sentence Transformers](https://www.sbert.net/)
 
-## 🤝 Assignment Details
+##  Assignment Details
 
 This project was created as part of the AI Intern assignment for **Kalpit Pvt Ltd, UK**.
 
@@ -284,15 +284,14 @@ This project was created as part of the AI Intern assignment for **Kalpit Pvt Lt
 - Vector store persists between runs for efficiency
 - System only answers based on the provided speech text
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - Dr. B.R. Ambedkar for the profound insights
 - LangChain, ChromaDB, HuggingFace, and Ollama communities
-- Kalpit Pvt Ltd for this learning opportunity
 
 ## 📧 Contact
 
-For questions or issues, contact: kalpiksingh2005@gmail.com
+For questions or issues, contact: dharmendrra06@gmail.com
 
 ---
 
