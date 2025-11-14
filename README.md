@@ -1,4 +1,4 @@
-# 🙏 AmbedkarGPT - RAG Q&A System
+#  AmbedkarGPT - RAG Q&A System
 
 A command-line Retrieval-Augmented Generation (RAG) system that answers questions based on Dr. B.R. Ambedkar's speech excerpt from "Annihilation of Caste". Built using LangChain, ChromaDB, HuggingFace Embeddings, and Ollama with Mistral 7B.
 
